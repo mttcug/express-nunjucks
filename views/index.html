@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <link rel="stylesheet" href="../static/css/vendor.min.css">
+    <link rel="stylesheet" href="../static/css/main.min.css">
+</head>
+<body id="bby">
+<nav>
+    <ul>
+        {% for item in category_list %}
+        <li>{{item.name}}</li>
+        {% endfor %}
+    </ul>
+</nav>
+<script src="../static/js/vendor.min.js"></script>
+<script src="../static/js/main.min.js"></script>
+</body>
+</html>
