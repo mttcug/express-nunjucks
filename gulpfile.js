@@ -8,8 +8,13 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     rename = require('gulp-rename'),
     del = require('delete'),
+    flatten=require('gulp-flatten'),
+    plumber=require('gulp-plumber'),
+    babel=require('gulp-babel'),
     nodemon= require('gulp-nodemon')
 runSequence = require('run-sequence');
+/*let gulpLoadPlugins = require('gulp-load-plugins');
+let plugins = gulpLoadPlugins();*/
 
 var browserSync = require('browser-sync').create();
 var reload = browserSync.reload;
@@ -55,6 +60,13 @@ var autoprefixer_option = [
 ];
 gulp.task('common_css', function () {
     return gulp.src(src.common_css)
+        .pipe(plumber({  // 编译出错时控制台打印错误，pipe 流不挂起
+            errorHandler: function(error) {
+                console.log(error.message);
+                // 参考 http://frontendgods.com/handling-errors-when-working-with-sass-watch-plumber-and-gulp/
+                this.emit("end");  // 多了这一句
+            }
+        }))
         .pipe(autoprefixer(autoprefixer_option))
         .pipe(concat('vendor.css'))
         .pipe(cleancss({compatibility: 'ie8'}))
@@ -64,6 +76,13 @@ gulp.task('common_css', function () {
 /*自己写的css*/
 gulp.task('private_css', function () {
     return gulp.src(src.main_css)
+        .pipe(plumber({  // 编译出错时控制台打印错误，pipe 流不挂起
+            errorHandler: function(error) {
+                console.log(error.message);
+                // 参考 http://frontendgods.com/handling-errors-when-working-with-sass-watch-plumber-and-gulp/
+                this.emit("end");  // 多了这一句
+            }
+        }))
         .pipe(autoprefixer(autoprefixer_option))
         .pipe(concat('main.css'))
         .pipe(cleancss({compatibility: 'ie8'}))
@@ -73,6 +92,13 @@ gulp.task('private_css', function () {
 // Components JS
 gulp.task('common_js', function () {
     return gulp.src(src.common_js)
+        .pipe(plumber({  // 编译出错时控制台打印错误，pipe 流不挂起
+            errorHandler: function(error) {
+                console.log(error.message);
+                // 参考 http://frontendgods.com/handling-errors-when-working-with-sass-watch-plumber-and-gulp/
+                this.emit("end");  // 多了这一句
+            }
+        }))
         .pipe(concat('vendor.js'))
         .pipe(uglify())
         .pipe(rename({suffix: '.min'}))
@@ -81,7 +107,15 @@ gulp.task('common_js', function () {
 /*自己写的js*/
 gulp.task('private_js', function () {
     return gulp.src(src.main_js)
+        .pipe(plumber({  // 编译出错时控制台打印错误，pipe 流不挂起
+            errorHandler: function(error) {
+                console.log(error.message);
+                // 参考 http://frontendgods.com/handling-errors-when-working-with-sass-watch-plumber-and-gulp/
+                this.emit("end");  // 多了这一句
+            }
+        }))
         .pipe(concat('main.js'))
+        .pipe(babel({presets: ['es2015']}))
         .pipe(uglify())
         .pipe(rename({suffix: '.min'}))
         .pipe(gulp.dest(dist.js))
@@ -102,6 +136,7 @@ var paths = {
 var nodemonConfig = {
     script : paths.server.index,
     ignore : ["gulpfile.js", "node_modules/"],
+    watch:[paths.server.index,'./app.js','./routes/*.js'],
     env    : {
         "NODE_ENV": "development"
     }
@@ -123,7 +158,8 @@ gulp.task('open', ['nodeserve'], function(){
         proxy: 'http://localhost:3000',
         files: ["public/**/*.*", "views/**", "routes/**"],
         browser: 'chrome',
-        port:8080
+        port:8080,
+        open:true,
     }, function() {
         console.log("browser refreshed.");
     });
@@ -141,7 +177,8 @@ gulp.task('watch', function () {
 //刷新浏览器
 var files=[
     './static/**/*',
-    './views/*.html'
+    './views/*.html',
+    './routes/*.html'
 ];
 gulp.task('reload',function () {
     gulp.watch(files).on('change',browserSync.reload);
