@@ -29,12 +29,13 @@ router.get('/', function(req, res, next) {
         url: "https://www.xw18.cn/xw/WebSiteService",
         method: 'POST',
         headers: headers,
-        form: {jsonrpc:'{"method": "search_transfer", "params":transferParams, "id": 4}'}
+        json:true,
+        body: JSON.stringify({"jsonrpc":"2.0","method": "search_transfer", "params":transferParams, "id": 4})
     };
 
 
     request(options, function (error, response, body) {
-        console.log("result:",body);
+        console.log("result1:",body.result.objects[0]);
         res.render('index', {
             category_list:[
                 {

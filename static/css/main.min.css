@@ -1,1 +1,1 @@
-*{margin:0;padding:0}#bby nav ul{list-style:none}#bby nav ul li{display:inline-block;padding:10px;background:#e0ffff}body{padding:50px;font:14px "Lucida Grande",Helvetica,Arial,sans-serif}a{color:#00b7ff}
+*{margin:0;padding:0}nav{padding:15px}#bby nav ul{list-style:none;display:block}#bby nav ul li{display:inline-block;font-size:14px;background:pink;padding:6px 10px;margin-left:5px}
