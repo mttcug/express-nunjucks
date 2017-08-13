@@ -37,7 +37,7 @@ router.get('/', function(req, res, next) {
     request(options, function (error, response, body) {
         console.log("result1:",body.result.objects[0]);
         res.render('index', {
-            category_list:[
+            nav_list:[
                 {
                     id:"1",
                     name:"首页"
@@ -62,7 +62,8 @@ router.get('/', function(req, res, next) {
                     id:"6",
                     name:"关于"
                 }
-            ]
+            ],
+            info_list:body.result.objects
         });
     });
 

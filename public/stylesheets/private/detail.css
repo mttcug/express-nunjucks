@@ -1,0 +1,58 @@
+.detail .info-header .title p:nth-of-type(1){
+    width:100%;
+    color: #424242;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+.detail .info-header .title p{
+    color: #b4b4b4;
+    font-size: 1.4rem;
+    text-align: center;
+}
+header p{
+    height: 40px;
+    line-height: 40px;
+    font-size: 1.6rem;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #e6e6e6;
+    background: #fbfbfb;
+}
+.left-line,.right-line{
+    width: 40px;
+    margin: 0px 10px;
+    vertical-align: middle;
+    border-top:1px solid #e6e6e6;
+    display: inline-block;
+}
+.space-10{
+    display: inline-block;
+    width: 10px;
+}
+.areaAndFee{
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+.areaAndFee .left-block,.areaAndFee .right-block{
+    display: inline-block;padding: 0px;margin: 0px;width: 49%;
+}
+.areaAndFee .left-block p,.areaAndFee .right-block p{
+    text-align: center;
+    width: 100%;
+}
+.areaAndFee .right-block{
+    border-left: 1px solid #f0f0f0;
+}
+.areaAndFee .left-block .title,.areaAndFee .right-block .title{
+    color: #666666;
+}
+.areaAndFee .left-block .value,.areaAndFee .right-block .value{
+    color: #ff3a55;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+.bg-divider{
+    width: 100%;
+    height: 10px;
+    background:#f0f0f0;
+}

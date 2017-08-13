@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <title>详情页</title>
+    <link rel="stylesheet" href="../static/css/vendor.min.css">
+    <link rel="stylesheet" href="../static/css/main.min.css">
+</head>
+<body id="transferDetail" class="detail">
+<header>
+    <p>信息详情</p>
+</header>
+    <div class="info-header">
+        <div class="title">
+            <p>{{infoDetail.title}}</p>
+            {% if infoDetail.type==1%}
+            <p><span class="left-line"></span>店铺转让 <span class="space-10"></span>信息编号：{{infoDetail.merchantId}}<span class="right-line"></span></p>
+            {% else %}
+            <p><span class="left-line"></span>店铺招租 <span class="space-10"></span>信息编号：{{infoDetail.merchantId}}<span class="right-line"></span></p>
+            {% endif %}
+        </div>
+        <div class="areaAndFee">
+            <div class="left-block">
+                <p class="title">面积</p>
+                <p class="value">{{infoDetail.content.area}}平米</p>
+            </div>
+            <div class="right-block">
+                <p class="title">转让费</p>
+                <p class="value">{{infoDetail.content.transferFee/1000000}}万元</p>
+            </div>
+        </div>
+    </div>
+<div class="bg-divider"></div>
+<div class="info-body">
+</div>
+
+</body>
+</html>

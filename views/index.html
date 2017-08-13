@@ -13,19 +13,29 @@
 </header>
 <nav>
     <ul>
-        {% for item in category_list %}
+        {% for item in nav_list %}
         <li>{{item.name}}</li>
         {% endfor %}
     </ul>
 </nav>
 <div class="transfer-list">
     <ul>
-        {% for item in category_list %}
+        {% for item in info_list %}
         <li>
-            <img src="{{item.photoUrl}}" alt="图片">
-            <div>
+            <a href="/detail/{{item.id}}">
+            <img src="{{item.photoUrl}}" alt="图片" class="info-img">
+            <div class="info-detail">
                 <p class="info-title">{{item.title}}</p>
+                <p><span>{{item.industryName}}</span><span>{{item.districtName}}</span></p>
+                <p><span>面积: <span>{{item.area}}</span></span>
+                    {% if item.type==1 %}
+                    <span>租金: <span>{{item.rent/100}}</span>{{item.rentMeasureName}}</span>
+                    {% else %}
+                    <span>转让费: <span>{{item.transferFee/1000000}}</span>万元</span>
+                    {% endif %}
+                </p>
             </div>
+            </a>
         </li>
         {% endfor %}
     </ul>
